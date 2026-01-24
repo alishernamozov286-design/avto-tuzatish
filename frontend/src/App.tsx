@@ -20,7 +20,6 @@ import MasterSpareParts from '@/pages/master/SpareParts';
 
 // Apprentice pages
 import ApprenticeTasks from '@/pages/apprentice/Tasks';
-import MyTasks from '@/pages/apprentice/MyTasks';
 import ApprenticeAchievements from '@/pages/apprentice/Achievements';
 import ApprenticeAIDiagnostic from '@/pages/apprentice/AIDiagnostic';
 

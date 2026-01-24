@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTasks, useUpdateTaskStatus, useDeleteTask } from '@/hooks/useTasks';
-import CreateTaskModal from '@/components/CreateTaskModal';
-import ViewTaskModal from '@/components/ViewTaskModal';
-import DeleteTaskModal from '@/components/DeleteTaskModal';
-import { Task } from '@/types';
+import { useTasks, useUpdateTaskStatus } from '@/hooks/useTasks';
 import { 
   CheckSquare, 
   Clock, 
@@ -23,13 +19,7 @@ import {
   Sparkles,
   XCircle,
   Circle,
-  Package,
-  Plus,
-  Eye,
-  Edit,
-  Trash2,
-  Award,
-  List
+  Package
 } from 'lucide-react';
 import { t } from '@/lib/transliteration';
 
@@ -37,7 +27,6 @@ const ApprenticeTasks: React.FC = () => {
   const { user } = useAuth();
   const { data: tasks, isLoading, error } = useTasks();
   const updateTaskStatus = useUpdateTaskStatus();
-  const deleteTaskMutation = useDeleteTask();
   
   // localStorage'dan tilni o'qish
   const language = React.useMemo<'latin' | 'cyrillic'>(() => {
@@ -51,15 +40,6 @@ const ApprenticeTasks: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterPriority, setFilterPriority] = useState<string>('all');
   const [carServices, setCarServices] = useState<any[]>([]);
-  
-  // Yangi state'lar
-  const [viewMode, setViewMode] = useState<'my-tasks' | 'all-tasks'>('my-tasks');
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [filter, setFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
 
   // Fetch car services
   useEffect(() => {
@@ -96,17 +76,6 @@ const ApprenticeTasks: React.FC = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
-  
-  const getPriorityColorGradient = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return 'bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-md';
-      case 'high': return 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md';
-      case 'medium': return 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white shadow-md';
-      case 'low': return 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md';
-      default: return 'bg-gray-100 text-gray-700';
-    }
-  };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'assigned': return 'bg-blue-100 text-blue-800';
@@ -117,50 +86,6 @@ const ApprenticeTasks: React.FC = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
-  
-  const getStatusColorBorder = (status: string) => {
-    switch (status) {
-      case 'assigned': return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'in-progress': return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'completed': return 'bg-orange-50 text-orange-700 border-orange-200';
-      case 'approved': return 'bg-green-50 text-green-700 border-green-200';
-      case 'rejected': return 'bg-red-50 text-red-700 border-red-200';
-      default: return 'bg-gray-50 text-gray-700 border-gray-200';
-    }
-  };
-  
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'assigned': return <CheckSquare className="h-3.5 w-3.5" />;
-      case 'in-progress': return <Clock className="h-3.5 w-3.5" />;
-      case 'completed': return <AlertCircle className="h-3.5 w-3.5" />;
-      case 'approved': return <CheckCircle className="h-3.5 w-3.5" />;
-      case 'rejected': return <AlertCircle className="h-3.5 w-3.5" />;
-      default: return <CheckSquare className="h-3.5 w-3.5" />;
-    }
-  };
-  
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'assigned': return t('Tayinlangan', language);
-      case 'in-progress': return t('Jarayonda', language);
-      case 'completed': return t('Bajarilgan', language);
-      case 'approved': return t('Tasdiqlangan', language);
-      case 'rejected': return t('Rad etilgan', language);
-      default: return status;
-    }
-  };
-  
-  const getPriorityText = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return t('Shoshilinch', language);
-      case 'high': return t('Yuqori', language);
-      case 'medium': return t('O\'rta', language);
-      case 'low': return t('Past', language);
-      default: return priority;
-    }
-  };
-
   const handleStartTask = async (taskId: string) => {
     setProcessingTaskId(taskId);
     try {
