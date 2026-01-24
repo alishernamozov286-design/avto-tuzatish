@@ -118,61 +118,61 @@ const ApprenticeAchievements: React.FC = () => {
   const weeklyActivity = getWeeklyActivity();
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">{t('Mening daromadim', language)}</h1>
-        <p className="mt-2 text-gray-600">
+    <div className="space-y-3 sm:space-y-6 p-2 sm:p-0 pb-20">
+      {/* Mobile-First Header */}
+      <div className="text-center sm:text-left">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('Mening daromadim', language)}</h1>
+        <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
           {t('Sizning professional rivojlanishingiz va erishgan yutuqlaringiz.', language)}
         </p>
       </div>
 
-      {/* Statistics Overview */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="card p-6">
-          <div className="flex items-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100">
-              <CheckCircle className="h-6 w-6 text-green-600" />
+      {/* Mobile-Optimized Statistics Overview */}
+      <div className="grid grid-cols-2 gap-2 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="card p-3 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-green-100 mb-2 sm:mb-0">
+              <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Tasdiqlangan vazifalar', language)}</p>
-              <p className="text-2xl font-bold text-gray-900">{approvedTasks.length}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="card p-6">
-          <div className="flex items-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-              <Clock className="h-6 w-6 text-blue-600" />
-            </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Jami ish soatlari', language)}</p>
-              <p className="text-2xl font-bold text-gray-900">{totalHours}</p>
+            <div className="sm:ml-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">{t('Tasdiqlangan', language)}</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{approvedTasks.length}</p>
             </div>
           </div>
         </div>
 
-        <div className="card p-6">
-          <div className="flex items-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100">
-              <TrendingUp className="h-6 w-6 text-purple-600" />
+        <div className="card p-3 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-blue-100 mb-2 sm:mb-0">
+              <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Bajarish foizi', language)}</p>
-              <p className="text-2xl font-bold text-gray-900">{completionRate}%</p>
+            <div className="sm:ml-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">{t('Ish soatlari', language)}</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{totalHours}</p>
             </div>
           </div>
         </div>
 
-        <div className="card p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200">
-          <div className="flex items-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500">
-              <Award className="h-6 w-6 text-white" />
+        <div className="card p-3 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-purple-100 mb-2 sm:mb-0">
+              <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-green-700">{t('Jami daromad', language)}</p>
-              <p className="text-2xl font-bold text-green-900">
+            <div className="sm:ml-4">
+              <p className="text-xs sm:text-sm font-medium text-gray-600">{t('Bajarish %', language)}</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{completionRate}%</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="card p-3 sm:p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 col-span-2 sm:col-span-2 lg:col-span-1">
+          <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-green-500 mb-2 sm:mb-0">
+              <Award className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+            </div>
+            <div className="sm:ml-4">
+              <p className="text-xs sm:text-sm font-medium text-green-700">{t('Jami daromad', language)}</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-900">
                 {new Intl.NumberFormat('uz-UZ').format(user?.earnings || 0)}
               </p>
               <p className="text-xs text-green-600">{t('so\'m', language)}</p>
@@ -181,11 +181,11 @@ const ApprenticeAchievements: React.FC = () => {
         </div>
       </div>
 
-      {/* Daromad */}
-      <div className="card p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-            <Award className="h-6 w-6 text-green-600" />
+      {/* Mobile-First Daromad Section */}
+      <div className="card p-3 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 gap-3">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <Award className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
             {t('Daromad tarixi', language)}
           </h3>
           
@@ -193,7 +193,7 @@ const ApprenticeAchievements: React.FC = () => {
           <select
             value={timeFilter}
             onChange={(e) => setTimeFilter(e.target.value as any)}
-            className="px-4 py-2 border-2 border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white font-medium text-gray-700"
+            className="px-3 sm:px-4 py-2 border-2 border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white font-medium text-gray-700 text-sm w-full sm:w-auto"
           >
             <option value="yesterday">{t('Kecha', language)}</option>
             <option value="today">{t('Bugun', language)}</option>
@@ -204,25 +204,25 @@ const ApprenticeAchievements: React.FC = () => {
           </select>
         </div>
 
-        {/* Earnings Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
-            <p className="text-sm text-green-700 mb-1">{t('Tanlangan davr', language)}</p>
-            <p className="text-3xl font-bold text-green-900">
+        {/* Mobile-Optimized Earnings Summary */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="p-3 sm:p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
+            <p className="text-xs sm:text-sm text-green-700 mb-1">{t('Tanlangan davr', language)}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-green-900">
               {new Intl.NumberFormat('uz-UZ').format(filteredEarnings)}
             </p>
             <p className="text-xs text-green-600 mt-1">{t('so\'m', language)}</p>
           </div>
-          <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200">
-            <p className="text-sm text-blue-700 mb-1">{t('Vazifalar soni', language)}</p>
-            <p className="text-3xl font-bold text-blue-900">
+          <div className="p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200">
+            <p className="text-xs sm:text-sm text-blue-700 mb-1">{t('Vazifalar soni', language)}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-blue-900">
               {filteredTasks.length}
             </p>
             <p className="text-xs text-blue-600 mt-1">{t('ta vazifa', language)}</p>
           </div>
-          <div className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
-            <p className="text-sm text-purple-700 mb-1">{t('O\'rtacha to\'lov', language)}</p>
-            <p className="text-3xl font-bold text-purple-900">
+          <div className="p-3 sm:p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+            <p className="text-xs sm:text-sm text-purple-700 mb-1">{t('O\'rtacha to\'lov', language)}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-purple-900">
               {filteredTasks.length > 0 
                 ? new Intl.NumberFormat('uz-UZ').format(Math.round(filteredEarnings / filteredTasks.length))
                 : '0'}
@@ -251,29 +251,29 @@ const ApprenticeAchievements: React.FC = () => {
               .filter((task: any) => task.payment && task.payment > 0)
               .sort((a: any, b: any) => new Date(b.approvedAt).getTime() - new Date(a.approvedAt).getTime())
               .map((task: any, index: number) => (
-                <div key={task._id} className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-4 flex-1">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500 text-white font-bold text-lg">
+                <div key={task._id} className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 hover:shadow-md transition-shadow gap-3">
+                  <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-green-500 text-white font-bold text-sm sm:text-lg flex-shrink-0">
                       {index + 1}
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-gray-900">{task.title}</h4>
-                      <p className="text-sm text-gray-600">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-gray-900 text-sm sm:text-base truncate">{task.title}</h4>
+                      <p className="text-xs sm:text-sm text-gray-600 truncate">
                         {task.car?.make} {task.car?.carModel} - {task.car?.licensePlate}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-gray-500 mt-1 truncate">
                         {task.approvedAt ? new Date(task.approvedAt).toLocaleDateString('uz-UZ', {
                           year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
                           hour: '2-digit',
                           minute: '2-digit'
                         }) : 'Sana noma\'lum'}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-green-600">
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-lg sm:text-2xl font-bold text-green-600">
                       +{new Intl.NumberFormat('uz-UZ').format(task.payment)}
                     </p>
                     <p className="text-xs text-green-700">so'm</p>
@@ -293,26 +293,26 @@ const ApprenticeAchievements: React.FC = () => {
 
 
       {/* Progress Chart */}
-      <div className="card p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">{t('Haftalik faoliyat', language)}</h3>
+      <div className="card p-3 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">{t('Haftalik faoliyat', language)}</h3>
         {weeklyActivity.every(day => day.hours === 0) ? (
-          <div className="text-center py-8">
-            <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500">{t('Hali haftalik faoliyat yo\'q', language)}</p>
-            <p className="text-sm text-gray-400 mt-1">{t('Vazifalarni bajarib, statistikangizni ko\'ring!', language)}</p>
+          <div className="text-center py-6 sm:py-8">
+            <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+            <p className="text-sm sm:text-base text-gray-500">{t('Hali haftalik faoliyat yo\'q', language)}</p>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">{t('Vazifalarni bajarib, statistikangizni ko\'ring!', language)}</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {weeklyActivity.map((day, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <span className="text-sm text-gray-600 w-24">{day.day}</span>
-                <div className="flex-1 mx-4 bg-gray-200 rounded-full h-2">
+              <div key={index} className="flex items-center justify-between gap-2 sm:gap-4">
+                <span className="text-xs sm:text-sm text-gray-600 w-16 sm:w-24 flex-shrink-0">{day.day}</span>
+                <div className="flex-1 bg-gray-200 rounded-full h-2">
                   <div 
                     className="bg-green-500 h-2 rounded-full transition-all duration-300" 
                     style={{ width: `${day.percentage}%` }}
                   ></div>
                 </div>
-                <span className="text-sm text-gray-900 w-16 text-right">
+                <span className="text-xs sm:text-sm text-gray-900 w-12 sm:w-16 text-right flex-shrink-0">
                   {day.hours > 0 ? `${day.hours.toFixed(1)} ${t('soat', language)}` : '-'}
                 </span>
               </div>

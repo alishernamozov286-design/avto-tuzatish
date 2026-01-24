@@ -15,8 +15,8 @@ import { handleValidationErrors } from '../middleware/validation';
 
 const router = express.Router();
 
-// Create task (master only)
-router.post('/', authenticate, authorize('master'), [
+// Create task (authenticated users can create tasks)
+router.post('/', authenticate, [
   body('title').trim().isLength({ min: 3 }).withMessage('Vazifa nomi kamida 3 ta belgidan iborat bo\'lishi kerak'),
   body('description').trim().isLength({ min: 5 }).withMessage('Tavsif kamida 5 ta belgidan iborat bo\'lishi kerak'),
   body('assignedTo').isMongoId().withMessage('Noto\'g\'ri shogird ID'),
@@ -37,8 +37,8 @@ router.get('/stats', authenticate, getTaskStats);
 // Get task by ID
 router.get('/:id', authenticate, getTaskById);
 
-// Update task (master only)
-router.put('/:id', authenticate, authorize('master'), [
+// Update task (master can update any task, apprentice can update their own tasks)
+router.put('/:id', authenticate, [
   body('title').optional().trim().isLength({ min: 3 }).withMessage('Vazifa nomi kamida 3 ta belgidan iborat bo\'lishi kerak'),
   body('description').optional().trim().isLength({ min: 5 }).withMessage('Tavsif kamida 5 ta belgidan iborat bo\'lishi kerak'),
   body('assignedTo').optional().isMongoId().withMessage('Noto\'g\'ri shogird ID'),
@@ -62,7 +62,7 @@ router.patch('/:id/approve', authenticate, authorize('master'), [
   handleValidationErrors
 ], approveTask);
 
-// Delete task (master only)
-router.delete('/:id', authenticate, authorize('master'), deleteTask);
+// Delete task (master can delete any task, apprentice can delete their own tasks)
+router.delete('/:id', authenticate, deleteTask);
 
 export default router;

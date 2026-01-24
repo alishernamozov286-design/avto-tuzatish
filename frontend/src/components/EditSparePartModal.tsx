@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Edit3, AlertCircle } from 'lucide-react';
 import { t } from '@/lib/transliteration';
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
+import { formatNumber, parseFormattedNumber } from '@/lib/utils';
 
 interface SparePart {
   _id: string;
@@ -28,13 +29,12 @@ const EditSparePartModal: React.FC<EditSparePartModalProps> = ({ isOpen, onClose
     return (savedLanguage as 'latin' | 'cyrillic') || 'latin';
   }, []);
 
-  console.log('EditSparePartModal - isOpen:', isOpen, 'sparePart:', sparePart);
-
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: '',
     price: '',
+    priceDisplay: '', // Formatli ko'rsatish uchun
     quantity: '',
     supplier: ''
   });
@@ -43,9 +43,11 @@ const EditSparePartModal: React.FC<EditSparePartModalProps> = ({ isOpen, onClose
 
   useEffect(() => {
     if (sparePart) {
+      const priceFormatted = formatNumber(sparePart.price.toString());
       setFormData({
         name: sparePart.name,
         price: sparePart.price.toString(),
+        priceDisplay: priceFormatted,
         quantity: sparePart.quantity.toString(),
         supplier: sparePart.supplier
       });
@@ -122,10 +124,23 @@ const EditSparePartModal: React.FC<EditSparePartModalProps> = ({ isOpen, onClose
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    if (name === 'price') {
+      // Pul formatini boshqarish
+      const formatted = formatNumber(value);
+      const numericValue = parseFormattedNumber(formatted);
+      
+      setFormData(prev => ({
+        ...prev,
+        price: numericValue.toString(),
+        priceDisplay: formatted
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
     
     if (errors[name]) {
       setErrors(prev => {
@@ -185,22 +200,20 @@ const EditSparePartModal: React.FC<EditSparePartModalProps> = ({ isOpen, onClose
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('Narx', language)} *
+              {t('Narx', language)} ({t("so'm", language)}) *
             </label>
             <input
-              type="number"
+              type="text"
               name="price"
               required
-              min="0"
-              step="0.01"
-              value={formData.price}
+              value={formData.priceDisplay}
               onChange={handleChange}
               className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all ${
                 errors.price 
                   ? 'border-red-300 focus:border-red-500' 
                   : 'border-gray-200 focus:border-purple-500'
               }`}
-              placeholder="0"
+              placeholder="1,000,000"
             />
             {errors.price && (
               <p className="mt-2 text-sm text-red-600 flex items-center gap-2">

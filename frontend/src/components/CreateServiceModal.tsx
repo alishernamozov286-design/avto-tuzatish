@@ -234,7 +234,6 @@ const CreateServiceModal: React.FC<CreateServiceModalProps> = ({ isOpen, onClose
       }
 
       const result = await serviceResponse.json();
-      console.log('✅ Service created:', result);
 
       // Reset form
       setSelectedCarId('');

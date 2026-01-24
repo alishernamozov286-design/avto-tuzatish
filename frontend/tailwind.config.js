@@ -91,6 +91,14 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      spacing: {
+        'safe-area-inset-bottom': 'env(safe-area-inset-bottom)',
+        'safe-area-inset-top': 'env(safe-area-inset-top)',
+      },
+      height: {
+        'safe-area-inset-bottom': 'env(safe-area-inset-bottom)',
+        'safe-area-inset-top': 'env(safe-area-inset-top)',
       }
     },
   },

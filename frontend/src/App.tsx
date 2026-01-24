@@ -20,6 +20,7 @@ import MasterSpareParts from '@/pages/master/SpareParts';
 
 // Apprentice pages
 import ApprenticeTasks from '@/pages/apprentice/Tasks';
+import ApprenticeAllTasks from '@/pages/apprentice/AllTasks';
 import ApprenticeAchievements from '@/pages/apprentice/Achievements';
 import ApprenticeAIDiagnostic from '@/pages/apprentice/AIDiagnostic';
 
@@ -175,7 +176,7 @@ function AppRoutes() {
         } />
         <Route path="apprentice/all-tasks" element={
           <ApprenticeRoute>
-            <MasterTasks />
+            <ApprenticeAllTasks />
           </ApprenticeRoute>
         } />
         <Route path="apprentice/achievements" element={

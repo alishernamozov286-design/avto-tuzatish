@@ -202,28 +202,28 @@ const ApprenticeTasks: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6 pb-8">
-      {/* Header with Green Theme */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 p-8 text-white shadow-2xl">
+    <div className="space-y-4 sm:space-y-6 pb-8">
+      {/* Responsive Header with Green Theme */}
+      <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 p-4 sm:p-6 md:p-8 text-white shadow-2xl">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative z-10">
-          <div className="flex items-center space-x-3 mb-3">
-            <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
-              <Target className="h-8 w-8" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-3 mb-3">
+            <div className="p-2 sm:p-3 bg-white/20 rounded-xl backdrop-blur-sm flex-shrink-0">
+              <Target className="h-6 w-6 sm:h-8 sm:w-8" />
             </div>
-            <div>
-              <h1 className="text-4xl font-bold">{t('Mening vazifalarim', language)}</h1>
-              <p className="text-green-100 mt-1">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold truncate">{t('Mening vazifalarim', language)}</h1>
+              <p className="text-green-100 mt-1 text-xs sm:text-sm md:text-base">
                 {t('Sizga berilgan', language)} {myTasks.length} {t('ta vazifani boshqaring', language)}
               </p>
             </div>
           </div>
         </div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+        <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 md:w-64 md:h-64 bg-white/5 rounded-full -mr-12 sm:-mr-16 md:-mr-32 -mt-12 sm:-mt-16 md:-mt-32"></div>
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { 
             name: t('Tayinlangan', language), 
@@ -258,19 +258,19 @@ const ApprenticeTasks: React.FC = () => {
           return (
             <div 
               key={stat.name}
-              className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+              className="group relative overflow-hidden rounded-lg sm:rounded-xl bg-white p-3 sm:p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
               <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className={`flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${stat.iconBg} group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className={`h-7 w-7 bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent`} />
+                  <div className={`flex h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br ${stat.iconBg} group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className={`h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent`} />
                   </div>
                 </div>
-                <div className="mt-4">
-                  <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-1">{stat.value}</p>
+                <div className="mt-2 sm:mt-3 md:mt-4">
+                  <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{stat.name}</p>
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-0.5 sm:mt-1">{stat.value}</p>
                 </div>
               </div>
             </div>
@@ -279,13 +279,13 @@ const ApprenticeTasks: React.FC = () => {
       </div>
 
       {/* Tabs and Filters */}
-      <div className="card p-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className="card p-4 sm:p-6">
+        <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 gap-4">
           {/* Tabs */}
-          <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+          <div className="flex space-x-1 sm:space-x-2 bg-gray-100 p-1 rounded-lg overflow-x-auto">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                 activeTab === 'all'
                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg'
                   : 'text-gray-600 hover:text-gray-900'
@@ -295,7 +295,7 @@ const ApprenticeTasks: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('active')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                 activeTab === 'active'
                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg'
                   : 'text-gray-600 hover:text-gray-900'
@@ -305,7 +305,7 @@ const ApprenticeTasks: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('completed')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                 activeTab === 'completed'
                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg'
                   : 'text-gray-600 hover:text-gray-900'
@@ -316,7 +316,7 @@ const ApprenticeTasks: React.FC = () => {
           </div>
 
           {/* Search and Filter */}
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3">
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -325,7 +325,7 @@ const ApprenticeTasks: React.FC = () => {
                 placeholder={t('Qidirish...', language)}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full sm:w-64"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full sm:w-48 md:w-64 text-sm"
               />
             </div>
 
@@ -335,7 +335,7 @@ const ApprenticeTasks: React.FC = () => {
               <select
                 value={filterPriority}
                 onChange={(e) => setFilterPriority(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent appearance-none bg-white w-full sm:w-48"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent appearance-none bg-white w-full sm:w-40 md:w-48 text-sm"
               >
                 <option value="all">{t('Barcha muhimlik', language)}</option>
                 <option value="urgent">{t('Shoshilinch', language)}</option>
@@ -351,12 +351,12 @@ const ApprenticeTasks: React.FC = () => {
       {/* Tasks List */}
       <div className="space-y-4">
         {filteredTasks.length === 0 ? (
-          <div className="card p-12 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 mb-4">
-              <Target className="h-10 w-10 text-gray-400" />
+          <div className="card p-8 sm:p-12 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 mb-4">
+              <Target className="h-8 w-8 sm:h-10 sm:w-10 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('Vazifalar topilmadi', language)}</h3>
-            <p className="text-gray-500">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{t('Vazifalar topilmadi', language)}</h3>
+            <p className="text-sm sm:text-base text-gray-500">
               {searchQuery || filterPriority !== 'all' 
                 ? t('Qidiruv yoki filtr bo\'yicha vazifalar topilmadi', language)
                 : t('Hozirda sizga vazifa berilmagan', language)}
@@ -377,7 +377,7 @@ const ApprenticeTasks: React.FC = () => {
             return (
               <div 
                 key={task._id}
-                className={`group card p-6 hover:shadow-xl transition-all duration-300 border-l-4 ${
+                className={`group card p-4 sm:p-6 hover:shadow-xl transition-all duration-300 border-l-4 ${
                   task.status === 'approved' ? 'border-l-green-500 bg-gradient-to-r from-green-50/50 to-transparent' :
                   task.status === 'completed' ? 'border-l-orange-500 bg-gradient-to-r from-orange-50/50 to-transparent' :
                   task.status === 'rejected' ? 'border-l-red-500 bg-gradient-to-r from-red-50/50 to-transparent' :
@@ -386,79 +386,100 @@ const ApprenticeTasks: React.FC = () => {
                 }`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                <div className="flex flex-col space-y-4 lg:flex-row lg:items-start lg:justify-between lg:space-y-0 gap-4">
                   {/* Left Content */}
-                  <div className="flex-1 space-y-4">
+                  <div className="flex-1 space-y-3 sm:space-y-4 min-w-0">
                     {/* Title and Status */}
                     <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h4 className="text-xl font-semibold text-gray-900 group-hover:text-green-600 transition-colors mb-2">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-green-600 transition-colors mb-2 truncate">
                           {task.title}
                         </h4>
-                        <p className="text-gray-600 leading-relaxed">{task.description}</p>
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed line-clamp-2">{task.description}</p>
                       </div>
                     </div>
 
                     {/* Badges */}
                     <div className="flex flex-wrap items-center gap-2">
                       {/* Priority Badge */}
-                      <span className={`inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-lg ${getPriorityColor(task.priority)}`}>
-                        {task.priority === 'urgent' && <AlertTriangle className="h-3 w-3 mr-1.5" />}
-                        {task.priority === 'high' && <AlertCircle className="h-3 w-3 mr-1.5" />}
-                        {task.priority === 'medium' && <Circle className="h-3 w-3 mr-1.5" />}
-                        {task.priority === 'low' && <CheckCircle className="h-3 w-3 mr-1.5" />}
-                        {task.priority === 'urgent' ? t('Shoshilinch', language) : 
-                         task.priority === 'high' ? t('Yuqori', language) :
-                         task.priority === 'medium' ? t('O\'rta', language) : t('Past', language)}
+                      <span className={`inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-semibold rounded-lg ${getPriorityColor(task.priority)}`}>
+                        {task.priority === 'urgent' && <AlertTriangle className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.priority === 'high' && <AlertCircle className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.priority === 'medium' && <Circle className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.priority === 'low' && <CheckCircle className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        <span className="hidden sm:inline">
+                          {task.priority === 'urgent' ? t('Shoshilinch', language) : 
+                           task.priority === 'high' ? t('Yuqori', language) :
+                           task.priority === 'medium' ? t('O\'rta', language) : t('Past', language)}
+                        </span>
+                        <span className="sm:hidden">
+                          {task.priority === 'urgent' ? t('Shosh', language) : 
+                           task.priority === 'high' ? t('Yuq', language) :
+                           task.priority === 'medium' ? t('O\'rta', language) : t('Past', language)}
+                        </span>
                       </span>
 
                       {/* Status Badge */}
-                      <span className={`inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-lg ${getStatusColor(task.status)}`}>
-                        {task.status === 'assigned' && <FileText className="h-3 w-3 mr-1.5" />}
-                        {task.status === 'in-progress' && <Zap className="h-3 w-3 mr-1.5" />}
-                        {task.status === 'completed' && <CheckCircle className="h-3 w-3 mr-1.5" />}
-                        {task.status === 'approved' && <Sparkles className="h-3 w-3 mr-1.5" />}
-                        {task.status === 'rejected' && <XCircle className="h-3 w-3 mr-1.5" />}
-                        {task.status === 'assigned' ? t('Tayinlangan', language) :
-                         task.status === 'in-progress' ? t('Jarayonda', language) :
-                         task.status === 'completed' ? t('Bajarilgan', language) :
-                         task.status === 'approved' ? t('Tasdiqlangan', language) : t('Rad etilgan', language)}
+                      <span className={`inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-semibold rounded-lg ${getStatusColor(task.status)}`}>
+                        {task.status === 'assigned' && <FileText className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.status === 'in-progress' && <Zap className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.status === 'completed' && <CheckCircle className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.status === 'approved' && <Sparkles className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        {task.status === 'rejected' && <XCircle className="h-3 w-3 mr-1 sm:mr-1.5" />}
+                        <span className="hidden sm:inline">
+                          {task.status === 'assigned' ? t('Tayinlangan', language) :
+                           task.status === 'in-progress' ? t('Jarayonda', language) :
+                           task.status === 'completed' ? t('Bajarilgan', language) :
+                           task.status === 'approved' ? t('Tasdiqlangan', language) : t('Rad etilgan', language)}
+                        </span>
+                        <span className="sm:hidden">
+                          {task.status === 'assigned' ? t('Tayinl', language) :
+                           task.status === 'in-progress' ? t('Jaray', language) :
+                           task.status === 'completed' ? t('Bajar', language) :
+                           task.status === 'approved' ? t('Tasdiq', language) : t('Rad', language)}
+                        </span>
                       </span>
 
                       {/* Due Date */}
-                      <span className="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-gray-100 text-gray-700 rounded-lg">
-                        <Calendar className="h-3 w-3 mr-1.5" />
-                        {new Date(task.dueDate).toLocaleDateString('uz-UZ')}
+                      <span className="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium bg-gray-100 text-gray-700 rounded-lg">
+                        <Calendar className="h-3 w-3 mr-1 sm:mr-1.5" />
+                        <span className="hidden sm:inline">
+                          {new Date(task.dueDate).toLocaleDateString('uz-UZ')}
+                        </span>
+                        <span className="sm:hidden">
+                          {new Date(task.dueDate).toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit' })}
+                        </span>
                       </span>
 
                       {/* Hours */}
-                      <span className="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-gray-100 text-gray-700 rounded-lg">
-                        <Clock className="h-3 w-3 mr-1.5" />
+                      <span className="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium bg-gray-100 text-gray-700 rounded-lg">
+                        <Clock className="h-3 w-3 mr-1 sm:mr-1.5" />
                         {isCompleted && task.actualHours ? `${task.actualHours} ${t('soat', language)}` : `${task.estimatedHours} ${t('soat', language)}`}
                       </span>
 
                       {/* Payment - har doim ko'rsatish */}
-                      <span className={`inline-flex items-center px-3 py-1.5 text-xs font-bold rounded-lg ${
+                      <span className={`inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-bold rounded-lg ${
                         task.payment && task.payment > 0 
                           ? 'bg-green-100 text-green-700' 
                           : 'bg-gray-100 text-gray-500'
                       }`}>
-                        💰 {task.payment ? new Intl.NumberFormat('uz-UZ').format(task.payment) : '0'} {t('so\'m', language)}
+                        💰 <span className="ml-1">{task.payment ? new Intl.NumberFormat('uz-UZ').format(task.payment) : '0'}</span>
+                        <span className="hidden sm:inline ml-1">{t('so\'m', language)}</span>
                       </span>
                     </div>
 
                     {/* Car Info */}
                     {task.car && (
-                      <div className="flex items-center space-x-3 p-4 bg-white/80 rounded-xl border border-gray-200">
-                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                      <div className="flex items-center space-x-3 p-3 sm:p-4 bg-white/80 rounded-xl border border-gray-200">
+                        <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-lg">
                           {task.car.make?.charAt(0) || '?'}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-gray-900 flex items-center gap-2">
-                            <Car className="h-4 w-4 text-gray-400" />
-                            {task.car.make || 'Noma\'lum'} {task.car.carModel || ''}
+                            <Car className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate">{task.car.make || 'Noma\'lum'} {task.car.carModel || ''}</span>
                           </p>
-                          <p className="text-xs text-gray-500">{task.car.licensePlate || 'Raqam yo\'q'}</p>
+                          <p className="text-xs text-gray-500 truncate">{task.car.licensePlate || 'Raqam yo\'q'}</p>
                         </div>
                       </div>
                     )}
@@ -584,17 +605,17 @@ const ApprenticeTasks: React.FC = () => {
                   </div>
 
                   {/* Right Actions */}
-                  <div className="flex lg:flex-col gap-3">
+                  <div className="flex flex-row lg:flex-col gap-2 sm:gap-3 lg:min-w-0 lg:w-auto">
                     {task.status === 'assigned' && (
                       <button 
                         onClick={() => handleStartTask(task._id)}
                         disabled={processingTaskId === task._id}
-                        className="flex-1 lg:flex-none btn bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap"
+                        className="flex-1 lg:flex-none btn bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap text-sm px-3 py-2 sm:px-4 sm:py-2"
                       >
                         {processingTaskId === task._id ? (
                           <>
                             <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                            <span>Yuklanmoqda...</span>
+                            <span className="hidden sm:inline">Yuklanmoqda...</span>
                           </>
                         ) : (
                           <>
@@ -608,12 +629,12 @@ const ApprenticeTasks: React.FC = () => {
                       <button 
                         onClick={() => handleCompleteTask(task._id)}
                         disabled={processingTaskId === task._id}
-                        className="flex-1 lg:flex-none btn bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap"
+                        className="flex-1 lg:flex-none btn bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap text-sm px-3 py-2 sm:px-4 sm:py-2"
                       >
                         {processingTaskId === task._id ? (
                           <>
                             <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                            <span>Yuklanmoqda...</span>
+                            <span className="hidden sm:inline">Yuklanmoqda...</span>
                           </>
                         ) : (
                           <>
@@ -626,22 +647,25 @@ const ApprenticeTasks: React.FC = () => {
                     {task.status === 'rejected' && relatedService && (
                       <button 
                         onClick={() => handleRestartService(relatedService._id)}
-                        className="flex-1 lg:flex-none btn bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap"
+                        className="flex-1 lg:flex-none btn bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap text-sm px-3 py-2 sm:px-4 sm:py-2"
                       >
                         <span className="text-lg">↻</span>
-                        <span>Qayta boshlash</span>
+                        <span className="hidden sm:inline">Qayta boshlash</span>
+                        <span className="sm:hidden">Qayta</span>
                       </button>
                     )}
                     {task.status === 'approved' && (
-                      <div className="flex items-center justify-center px-6 py-3 bg-green-100 text-green-700 rounded-lg font-semibold">
-                        <CheckCircle className="h-5 w-5 mr-2" />
-                        {t('Tasdiqlangan', language)}
+                      <div className="flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-green-100 text-green-700 rounded-lg font-semibold text-sm">
+                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                        <span className="hidden sm:inline">{t('Tasdiqlangan', language)}</span>
+                        <span className="sm:hidden">{t('Tasdiq', language)}</span>
                       </div>
                     )}
                     {task.status === 'completed' && (
-                      <div className="flex items-center justify-center px-6 py-3 bg-orange-100 text-orange-700 rounded-lg font-semibold">
-                        <Clock className="h-5 w-5 mr-2" />
-                        {t('Kutilmoqda', language)}
+                      <div className="flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-orange-100 text-orange-700 rounded-lg font-semibold text-sm">
+                        <Clock className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                        <span className="hidden sm:inline">{t('Kutilmoqda', language)}</span>
+                        <span className="sm:hidden">{t('Kutish', language)}</span>
                       </div>
                     )}
                   </div>

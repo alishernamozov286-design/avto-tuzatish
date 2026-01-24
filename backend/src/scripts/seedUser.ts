@@ -8,7 +8,6 @@ const seedUser = async () => {
   try {
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI!);
-    console.log('Connected to MongoDB');
 
     // Check if users already exist
     const existingMaster = await User.findOne({ username: 'alisher' });
@@ -24,12 +23,6 @@ const seedUser = async () => {
         role: 'master'
       });
       await masterUser.save();
-      console.log('Master user created:');
-      console.log('Username: alisher');
-      console.log('Password: 201120');
-      console.log('Role: master');
-    } else {
-      console.log('Master user "alisher" already exists');
     }
 
     // Create apprentice user if doesn't exist
@@ -42,19 +35,12 @@ const seedUser = async () => {
         role: 'apprentice'
       });
       await apprenticeUser.save();
-      console.log('Apprentice user created:');
-      console.log('Username: shogird');
-      console.log('Password: 123456');
-      console.log('Role: apprentice');
-    } else {
-      console.log('Apprentice user "shogird" already exists');
     }
 
   } catch (error) {
     console.error('Error seeding user:', error);
   } finally {
     await mongoose.disconnect();
-    console.log('Disconnected from MongoDB');
   }
 };
 

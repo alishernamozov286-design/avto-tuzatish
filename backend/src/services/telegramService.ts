@@ -31,7 +31,6 @@ class TelegramService {
         }
         this.loadCarPhoneNumbers();
         this.setupCarBot();
-        console.log('✅ Car Telegram bot initialized');
       } catch (error: any) {
         console.error('⚠️ Car Telegram bot initialization failed:', error.message);
         this.carBot = null;
@@ -50,7 +49,6 @@ class TelegramService {
         this.loadPhoneNumbers();
         this.setupDebtBot();
         this.setupDebtReminders();
-        console.log('✅ Debt Telegram bot initialized');
       } catch (error: any) {
         console.error('⚠️ Debt Telegram bot initialization failed:', error.message);
         this.debtBot = null;

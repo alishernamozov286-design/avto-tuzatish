@@ -31,7 +31,7 @@ export default function PWAInstallPrompt() {
     const { outcome } = await deferredPrompt.userChoice;
 
     if (outcome === 'accepted') {
-      console.log('PWA o\'rnatildi');
+      // PWA installed successfully
     }
 
     setDeferredPrompt(null);

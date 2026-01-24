@@ -153,8 +153,7 @@ const startServer = async () => {
     const HOST = process.env.HOST || '0.0.0.0';
     
     server = app.listen(PORT, HOST, () => {
-      console.log(`✅ Server running on http://${HOST}:${PORT}`);
-      console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+      // Server started successfully
     });
 
     // Handle server errors

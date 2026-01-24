@@ -10,19 +10,17 @@ import {
   User,
   Users,
   Award,
-  Menu,
-  X,
   Globe,
   ListTodo,
   Package,
 } from 'lucide-react';
 import { t } from '@/lib/transliteration';
+import BottomNavbar from './BottomNavbar';
 
 const Layout: React.FC = () => {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   // localStorage'dan tilni o'qish va o'zgartirish
@@ -51,13 +49,8 @@ const Layout: React.FC = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-
   // Sidebar ochiq yoki yopiq
-  const isExpanded = isMobile ? isMobileMenuOpen : isHovered;
+  const isExpanded = isHovered;
 
   // Rol asosida navigatsiya menyusini aniqlash
   const getMasterNavigation = () => [
@@ -81,9 +74,7 @@ const Layout: React.FC = () => {
   const navigation = user?.role === 'master' ? getMasterNavigation() : getApprenticeNavigation();
 
   const isActive = (path: string) => {
-    if (path === '/app/tasks') {
-      return location.pathname === '/app/master/tasks' || location.pathname === '/app/apprentice/tasks';
-    }
+    // Aniq path matching
     return location.pathname === path;
   };
 
@@ -103,7 +94,7 @@ const Layout: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Mobile Header */}
       {isMobile && (
-        <div className="fixed top-0 left-0 right-0 z-[60] bg-white shadow-md">
+        <div className="fixed top-0 left-0 right-0 z-[60] bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50">
           <div className="flex items-center justify-between px-4 py-3">
             {/* Logo and Site Name */}
             <div className="flex items-center space-x-3">
@@ -120,40 +111,38 @@ const Layout: React.FC = () => {
               </div>
             </div>
 
-            {/* Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2.5 rounded-xl bg-gradient-to-r ${getRoleGradient()} text-white shadow-lg hover:scale-105 transition-all duration-200`}
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
+            {/* Language Toggle & Logout Buttons */}
+            <div className="flex items-center space-x-2">
+              {/* Language Toggle Button */}
+              <button
+                onClick={toggleLanguage}
+                className="p-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg hover:scale-105 transition-all duration-200 group"
+                title={language === 'latin' ? 'Кириллица' : 'Lotin'}
+              >
+                <Globe className="h-5 w-5 group-hover:rotate-12 transition-transform duration-200" />
+              </button>
+
+              {/* Logout Button */}
+              <button
+                onClick={logout}
+                className="p-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg hover:scale-105 transition-all duration-200 group"
+                title={t("Chiqish", language)}
+              >
+                <LogOut className="h-5 w-5 group-hover:translate-x-0.5 transition-transform duration-200" />
+              </button>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Overlay for mobile */}
-      {isMobile && isMobileMenuOpen && (
+      {/* Sidebar - faqat desktop uchun */}
+      {!isMobile && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 mt-16"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <div 
-        className={`fixed inset-y-0 left-0 z-50 bg-white shadow-2xl transition-all duration-300 ease-in-out ${
-          isMobile 
-            ? `${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} w-72 mt-16`
-            : `${isExpanded ? 'w-72' : 'w-20'}`
-        }`}
-        onMouseEnter={() => !isMobile && setIsHovered(true)}
-        onMouseLeave={() => !isMobile && setIsHovered(false)}
-      >
-        <div className="flex h-full flex-col">
+          className={`fixed inset-y-0 left-0 z-50 bg-white shadow-2xl transition-all duration-300 ease-in-out ${isExpanded ? 'w-72' : 'w-20'}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="flex h-full flex-col">
           {/* Logo */}
           <div className={`relative flex h-20 items-center ${isExpanded ? 'px-4' : 'justify-center'} border-b border-gray-100 bg-gradient-to-r ${getRoleGradient()}`}>
             <div className="absolute inset-0 bg-black opacity-5"></div>
@@ -315,17 +304,21 @@ const Layout: React.FC = () => {
               )}
             </div>
           </div>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Main content */}
       <div className={`transition-all duration-300 ${isMobile ? 'pl-0' : (isExpanded ? 'pl-72' : 'pl-20')}`}>
-        <main className={`py-8 ${isMobile ? 'pt-20' : ''}`}>
+        <main className={`py-8 ${isMobile ? 'pt-20 pb-24' : ''}`}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Outlet />
           </div>
         </main>
       </div>
+
+      {/* Bottom Navigation - faqat mobile da */}
+      <BottomNavbar />
     </div>
   );
 };

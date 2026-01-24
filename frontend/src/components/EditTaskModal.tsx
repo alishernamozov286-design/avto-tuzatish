@@ -118,29 +118,29 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
 
   return (
     <div className="fixed inset-0 z-[9999] overflow-y-auto">
-      <div className="flex min-h-screen items-center justify-center p-4">
+      <div className="flex min-h-screen items-center justify-center p-2 sm:p-4">
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
         
-        <div className="relative bg-white rounded-xl shadow-2xl max-w-lg w-full">
+        <div className="relative bg-white rounded-lg sm:rounded-xl shadow-2xl max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-4 rounded-t-xl">
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-3 sm:p-4 rounded-t-lg sm:rounded-t-xl sticky top-0 z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="bg-white/20 p-1.5 rounded-lg">
                   <FileText className="h-4 w-4 text-white" />
                 </div>
-                <h3 className="text-base font-bold text-white">Vazifani tahrirlash</h3>
+                <h3 className="text-sm sm:text-base font-bold text-white">Vazifani tahrirlash</h3>
               </div>
               <button onClick={onClose} className="text-white/80 hover:text-white p-1">
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-4 space-y-3">
+          <form onSubmit={handleSubmit} className="p-3 sm:p-4 space-y-3 sm:space-y-4">
             {/* Title */}
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
                 Vazifa nomi *
               </label>
               <input
@@ -149,14 +149,14 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Masalan: Moy almashtirish"
-                className="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
+              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
                 Tavsif *
               </label>
               <textarea
@@ -165,23 +165,23 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
                 onChange={handleChange}
                 rows={2}
                 placeholder="Qisqacha tavsif..."
-                className="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                className="w-full px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                 required
               />
             </div>
 
             {/* Apprentice and Car */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  <User className="h-3 w-3 inline mr-1" />
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <User className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1" />
                   Shogird *
                 </label>
                 <select
                   name="assignedTo"
                   value={formData.assignedTo}
                   onChange={handleChange}
-                  className="w-full px-2 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   required
                 >
                   <option value="">Tanlang</option>
@@ -194,15 +194,15 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  <Car className="h-3 w-3 inline mr-1" />
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <Car className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1" />
                   Mashina *
                 </label>
                 <select
                   name="car"
                   value={formData.car}
                   onChange={handleChange}
-                  className="w-full px-2 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   required
                 >
                   <option value="">Tanlang</option>
@@ -218,15 +218,15 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
             {/* Work Selection - faqat mashina tanlanganda ko'rinadi */}
             {formData.car && (
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  <Wrench className="h-3 w-3 inline mr-1" />
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <Wrench className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1" />
                   Ish nomi
                 </label>
                 <select
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  className="w-full px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   disabled={loadingServices}
                 >
                   <option value="">
@@ -247,17 +247,17 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
             )}
 
             {/* Priority, Due Date, Hours, Payment */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  <AlertTriangle className="h-3 w-3 inline mr-1" />
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <AlertTriangle className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1" />
                   Muhimlik
                 </label>
                 <select
                   name="priority"
                   value={formData.priority}
                   onChange={handleChange}
-                  className="w-full px-2 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                 >
                   <option value="low">Past</option>
                   <option value="medium">O'rta</option>
@@ -267,8 +267,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  <Calendar className="h-3 w-3 inline mr-1" />
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <Calendar className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1" />
                   Muddat *
                 </label>
                 <input
@@ -277,16 +277,16 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
                   value={formData.dueDate}
                   onChange={handleChange}
                   min={new Date().toISOString().split('T')[0]}
-                  className="w-full px-2 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   required
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  <Clock className="h-3 w-3 inline mr-1" />
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <Clock className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1" />
                   Soat *
                 </label>
                 <input
@@ -296,13 +296,13 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
                   onChange={handleChange}
                   min="0.5"
                   step="0.5"
-                  className="w-full px-2 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
                   💰 To'lov (so'm)
                 </label>
                 <input
@@ -311,25 +311,25 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, task }) 
                   value={formData.payment}
                   onChange={handleChange}
                   min="0"
-                  className="w-full px-2 py-2 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-sm border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Avtomatik"
                 />
               </div>
             </div>
 
             {/* Footer */}
-            <div className="flex justify-end gap-2 pt-3 border-t">
+            <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3 sm:pt-4 border-t">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-1.5 text-sm bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50"
+                className="px-4 py-2 sm:py-2.5 text-sm bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 order-2 sm:order-1"
               >
                 Bekor qilish
               </button>
               <button
                 type="submit"
                 disabled={updateTaskMutation.isPending}
-                className="px-4 py-1.5 text-sm bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 sm:py-2.5 text-sm bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed order-1 sm:order-2"
               >
                 {updateTaskMutation.isPending ? 'Saqlanmoqda...' : 'Saqlash'}
               </button>

@@ -405,6 +405,33 @@
   animation: slideUpDropdown 0.3s ease-out;
 }
 
+/* Professional hover effects */
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+.scale-98 {
+  transform: scale(0.98);
+}
+
+/* Professional shadow effects */
+.shadow-professional {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-navbar {
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Refined opacity classes */
+.opacity-8 {
+  opacity: 0.08;
+}
+
+.opacity-4 {
+  opacity: 0.04;
+}
+
 
 /* Shadow Glow Effects */
 .shadow-glow {
@@ -417,6 +444,10 @@
 
 .shadow-glow-red {
   box-shadow: 0 10px 40px -10px rgba(239, 68, 68, 0.3);
+}
+
+.shadow-3xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 /* Custom Scrollbar Styles - Kichik va zamonaviy */

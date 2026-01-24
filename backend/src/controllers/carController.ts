@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import Car from '../models/Car';
+import Task from '../models/Task';
 import SparePart from '../models/SparePart';
 import { AuthRequest } from '../middleware/auth';
 import telegramService from '../services/telegramService';
@@ -337,7 +338,7 @@ export const deleteCar = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Mashina ishlarini olish
+// Mashina ishlarini olish (faqat berilmagan xizmatlar)
 export const getCarServices = async (req: AuthRequest, res: Response) => {
   try {
     const carId = req.params.id;
@@ -348,9 +349,24 @@ export const getCarServices = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: 'Mashina topilmadi' });
     }
 
-    // Mashina serviceItems dan ishlarni olish
-    const services = car.serviceItems.map(item => ({
-      _id: item._id,
+    // Bu mashina uchun allaqachon berilgan xizmatlarni topish
+    const assignedTasks = await Task.find({ 
+      car: carId,
+      status: { $in: ['assigned', 'in-progress', 'completed', 'approved'] }
+    }).select('service');
+    
+    // Berilgan xizmatlar ID larini olish
+    const assignedServiceIds = assignedTasks
+      .filter(task => task.service)
+      .map(task => task.service!.toString());
+
+    // Mashina serviceItems dan faqat berilmagan ishlarni olish
+    const availableServices = car.serviceItems.filter(item => 
+      item._id && !assignedServiceIds.includes(item._id.toString())
+    );
+
+    const services = availableServices.map(item => ({
+      _id: item._id!,
       name: item.name,
       description: item.description,
       price: item.price,

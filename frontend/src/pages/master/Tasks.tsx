@@ -154,153 +154,161 @@ const MasterTasks: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 -m-8 p-6">
-      <div className="max-w-7xl mx-auto space-y-6 animate-fade-in">
-        {/* Compact Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-2 sm:p-6 pb-20">
+      <div className="max-w-7xl mx-auto space-y-3 sm:space-y-6 animate-fade-in">
+        {/* Mobile-First Header */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <div className="text-center sm:text-left">
+            <h1 className="text-xl sm:text-3xl font-bold text-gray-900">
               Vazifalar
             </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              {tasks?.tasks?.length || 0} ta vazifa
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">
+              {tasks?.tasks?.length || 0} ta vazifa mavjud
             </p>
           </div>
           <button
             onClick={() => setIsCreateModalOpen(true)}
-            className="btn-primary group"
+            className="btn-primary group w-full sm:w-auto py-3 sm:py-2"
           >
             <Plus className="h-4 w-4 mr-2 group-hover:rotate-90 transition-transform duration-300" />
-            <span>Yangi</span>
+            <span className="font-semibold">Yangi vazifa</span>
           </button>
         </div>
 
-        {/* Statistics */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Responsive Statistics */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:grid-cols-4">
           <div className="stats-card-primary animate-slide-up">
-            <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
-                <CheckSquare className="h-6 w-6" />
+            <div className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between mb-3 sm:mb-4">
+              <div className="bg-white/20 p-2 sm:p-3 rounded-xl backdrop-blur-sm mb-2 sm:mb-0">
+                <CheckSquare className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <div className="text-right">
-                <p className="text-4xl font-bold">
+              <div className="text-center sm:text-right">
+                <p className="text-2xl sm:text-4xl font-bold">
                   {tasks?.tasks?.filter((task: any) => task.status === 'assigned').length || 0}
                 </p>
-                <p className="text-sm text-blue-100 mt-1">+12% bu hafta</p>
+                <p className="text-xs sm:text-sm text-blue-100 mt-1 hidden sm:block">+12% bu hafta</p>
               </div>
             </div>
-            <p className="text-white/90 font-semibold">Tayinlangan</p>
+            <p className="text-white/90 font-semibold text-sm sm:text-base text-center sm:text-left">Tayinlangan</p>
           </div>
 
           <div className="stats-card-warning animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
-                <Clock className="h-6 w-6" />
+            <div className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between mb-3 sm:mb-4">
+              <div className="bg-white/20 p-2 sm:p-3 rounded-xl backdrop-blur-sm mb-2 sm:mb-0">
+                <Clock className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <div className="text-right">
-                <p className="text-4xl font-bold">
+              <div className="text-center sm:text-right">
+                <p className="text-2xl sm:text-4xl font-bold">
                   {tasks?.tasks?.filter((task: any) => task.status === 'in-progress').length || 0}
                 </p>
-                <p className="text-sm text-amber-100 mt-1">Faol</p>
+                <p className="text-xs sm:text-sm text-amber-100 mt-1 hidden sm:block">Faol</p>
               </div>
             </div>
-            <p className="text-white/90 font-semibold">Jarayonda</p>
+            <p className="text-white/90 font-semibold text-sm sm:text-base text-center sm:text-left">Jarayonda</p>
           </div>
 
-          <div className="card p-6 bg-gradient-to-br from-orange-500 to-red-500 text-white hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
-                <AlertCircle className="h-6 w-6" />
+          <div className="card p-4 sm:p-6 bg-gradient-to-br from-orange-500 to-red-500 text-white hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <div className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between mb-3 sm:mb-4">
+              <div className="bg-white/20 p-2 sm:p-3 rounded-xl backdrop-blur-sm mb-2 sm:mb-0">
+                <AlertCircle className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <div className="text-right">
-                <p className="text-4xl font-bold">
+              <div className="text-center sm:text-right">
+                <p className="text-2xl sm:text-4xl font-bold">
                   {tasks?.tasks?.filter((task: any) => task.status === 'completed').length || 0}
                 </p>
-                <p className="text-sm text-orange-100 mt-1">Tekshirish kerak</p>
+                <p className="text-xs sm:text-sm text-orange-100 mt-1 hidden sm:block">Tekshirish kerak</p>
               </div>
             </div>
-            <p className="text-white/90 font-semibold">Kutilmoqda</p>
+            <p className="text-white/90 font-semibold text-sm sm:text-base text-center sm:text-left">Kutilmoqda</p>
           </div>
 
           <div className="stats-card-success animate-slide-up" style={{ animationDelay: '0.3s' }}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
-                <CheckCircle className="h-6 w-6" />
+            <div className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between mb-3 sm:mb-4">
+              <div className="bg-white/20 p-2 sm:p-3 rounded-xl backdrop-blur-sm mb-2 sm:mb-0">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <div className="text-right">
-                <p className="text-4xl font-bold">
+              <div className="text-center sm:text-right">
+                <p className="text-2xl sm:text-4xl font-bold">
                   {tasks?.tasks?.filter((task: any) => task.status === 'approved').length || 0}
                 </p>
-                <p className="text-sm text-green-100 mt-1">+18% bu hafta</p>
+                <p className="text-xs sm:text-sm text-green-100 mt-1 hidden sm:block">+18% bu hafta</p>
               </div>
             </div>
-            <p className="text-white/90 font-semibold">Tasdiqlangan</p>
+            <p className="text-white/90 font-semibold text-sm sm:text-base text-center sm:text-left">Tasdiqlangan</p>
           </div>
         </div>
 
-        {/* Search and Filter */}
-        <div className="card-gradient p-6">
+        {/* Mobile-First Search and Filter */}
+        <div className="card-gradient p-3 sm:p-6">
           {/* Search */}
-          <div className="relative mb-6">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <div className="relative mb-3 sm:mb-6">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <input
               type="text"
-              placeholder="Vazifa, shogird yoki avtomobil bo'yicha qidirish..."
+              placeholder="Qidirish..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="input pl-12 text-base"
+              className="input pl-10 text-sm w-full"
             />
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex items-center gap-3 overflow-x-auto pb-2">
-            <div className="flex items-center gap-2 text-gray-600 font-semibold mr-2">
+          {/* Filter Select - Mobile Optimized */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-gray-600 font-semibold">
               <Filter className="h-4 w-4" />
               <span className="text-sm">Filter:</span>
             </div>
-            {[
-              { value: 'all', label: 'Barchasi', count: tasks?.tasks?.length || 0, color: 'bg-gray-600' },
-              { value: 'assigned', label: 'Tayinlangan', count: tasks?.tasks?.filter((t: any) => t.status === 'assigned').length || 0, color: 'bg-blue-600' },
-              { value: 'in-progress', label: 'Jarayonda', count: tasks?.tasks?.filter((t: any) => t.status === 'in-progress').length || 0, color: 'bg-amber-600' },
-              { value: 'completed', label: 'Kutilmoqda', count: tasks?.tasks?.filter((t: any) => t.status === 'completed').length || 0, color: 'bg-orange-600' },
-              { value: 'approved', label: 'Tasdiqlangan', count: tasks?.tasks?.filter((t: any) => t.status === 'approved').length || 0, color: 'bg-green-600' }
-            ].map((tab) => (
-              <button
-                key={tab.value}
-                onClick={() => setFilter(tab.value)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 whitespace-nowrap ${
-                  filter === tab.value
-                    ? `${tab.color} text-white shadow-md scale-105`
-                    : 'bg-white text-gray-700 hover:bg-gray-50 shadow-sm hover:shadow-md'
-                }`}
+            <div className="relative">
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="w-full px-4 py-3 text-sm font-semibold bg-white border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer shadow-sm hover:shadow-md transition-all duration-200"
               >
-                {tab.label}
-                <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                  filter === tab.value ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-700'
-                }`}>
-                  {tab.count}
-                </span>
-              </button>
-            ))}
+                <option value="all">
+                  Barchasi ({tasks?.tasks?.length || 0})
+                </option>
+                <option value="assigned">
+                  Tayinlangan ({tasks?.tasks?.filter((t: any) => t.status === 'assigned').length || 0})
+                </option>
+                <option value="in-progress">
+                  Jarayonda ({tasks?.tasks?.filter((t: any) => t.status === 'in-progress').length || 0})
+                </option>
+                <option value="completed">
+                  Kutilmoqda ({tasks?.tasks?.filter((t: any) => t.status === 'completed').length || 0})
+                </option>
+                <option value="approved">
+                  Tasdiqlangan ({tasks?.tasks?.filter((t: any) => t.status === 'approved').length || 0})
+                </option>
+                <option value="rejected">
+                  Rad etilgan ({tasks?.tasks?.filter((t: any) => t.status === 'rejected').length || 0})
+                </option>
+              </select>
+              {/* Custom dropdown arrow */}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Tasks Grid - 3 per row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Responsive Tasks Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {searchedTasks?.map((task: any) => (
             <div
               key={task._id}
               className="card hover:shadow-lg transition-all duration-300 overflow-hidden group"
             >
               {/* Task Header */}
-              <div className="p-5 space-y-3">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors flex-1 line-clamp-2">
+              <div className="p-4 sm:p-5 space-y-3">
+                <div className="flex items-start justify-between gap-2 sm:gap-3">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors flex-1 line-clamp-2">
                     {task.title}
                   </h3>
-                  <span className={`px-2.5 py-1 text-xs font-bold rounded-lg ${getPriorityColor(task.priority)} flex items-center gap-1 shrink-0`}>
+                  <span className={`px-2 sm:px-2.5 py-1 text-xs font-bold rounded-lg ${getPriorityColor(task.priority)} flex items-center gap-1 shrink-0`}>
                     <Zap className="h-3 w-3" />
-                    {getPriorityText(task.priority)}
+                    <span className="hidden sm:inline">{getPriorityText(task.priority)}</span>
                   </span>
                 </div>
                 
@@ -308,7 +316,7 @@ const MasterTasks: React.FC = () => {
                 
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 bg-blue-50 px-2.5 py-1.5 rounded-lg">
-                    <div className="h-6 w-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shrink-0">
+                    <div className="h-5 w-5 sm:h-6 sm:w-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs shrink-0">
                       {task.assignedTo.name.charAt(0).toUpperCase()}
                     </div>
                     <span className="font-semibold text-gray-900 text-sm truncate">{task.assignedTo.name}</span>
@@ -320,60 +328,61 @@ const MasterTasks: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 text-xs">
-                  <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-semibold border ${getStatusColor(task.status)}`}>
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs">
+                  <span className={`inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg font-semibold border ${getStatusColor(task.status)}`}>
                     {getStatusIcon(task.status)}
-                    {getStatusText(task.status)}
+                    <span className="hidden sm:inline">{getStatusText(task.status)}</span>
                   </span>
-                  <div className="flex items-center gap-1 text-gray-600 bg-gray-50 px-2.5 py-1 rounded-lg">
+                  <div className="flex items-center gap-1 text-gray-600 bg-gray-50 px-2 sm:px-2.5 py-1 rounded-lg">
                     <Clock className="h-3 w-3" />
                     <span className="font-medium">{task.estimatedHours}s</span>
                   </div>
                   {task.payment && task.payment > 0 && (
-                    <div className="flex items-center gap-1 text-green-600 bg-green-50 px-2.5 py-1 rounded-lg">
+                    <div className="flex items-center gap-1 text-green-600 bg-green-50 px-2 sm:px-2.5 py-1 rounded-lg">
                       <DollarSign className="h-3 w-3" />
                       <span className="font-medium">{task.payment.toLocaleString()}</span>
                     </div>
                   )}
-                  <div className="flex items-center gap-1 text-gray-600 bg-gray-50 px-2.5 py-1 rounded-lg">
+                  <div className="flex items-center gap-1 text-gray-600 bg-gray-50 px-2 sm:px-2.5 py-1 rounded-lg">
                     <Calendar className="h-3 w-3" />
-                    <span className="font-medium">{new Date(task.createdAt).toLocaleDateString('uz-UZ')}</span>
+                    <span className="font-medium hidden sm:inline">{new Date(task.createdAt).toLocaleDateString('uz-UZ')}</span>
+                    <span className="font-medium sm:hidden">{new Date(task.createdAt).toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit' })}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Task Footer */}
-              <div className="px-5 py-3 bg-gradient-to-r from-gray-50 to-blue-50/30 border-t border-gray-100 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
+              {/* Task Footer - Responsive */}
+              <div className="px-4 sm:px-5 py-3 bg-gradient-to-r from-gray-50 to-blue-50/30 border-t border-gray-100 flex items-center justify-between">
+                <div className="flex items-center gap-1 sm:gap-1.5">
                   <button 
                     onClick={() => handleViewTask(task)}
-                    className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors" 
+                    className="p-1.5 sm:p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors" 
                     title="Ko'rish"
                   >
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </button>
                   <button 
                     onClick={() => handleEditTask(task)}
-                    className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors" 
+                    className="p-1.5 sm:p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors" 
                     title="Tahrirlash"
                   >
-                    <Edit className="h-4 w-4" />
+                    <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </button>
                   {task.status === 'completed' && (
                     <button 
                       onClick={() => handleApproveTask(task)}
-                      className="p-2 text-green-600 hover:bg-green-100 rounded-lg transition-colors" 
+                      className="p-1.5 sm:p-2 text-green-600 hover:bg-green-100 rounded-lg transition-colors" 
                       title="Tasdiqlash/Rad etish"
                     >
-                      <CheckCircle className="h-4 w-4" />
+                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </button>
                   )}
                   <button 
                     onClick={() => handleDeleteTask(task)}
-                    className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors" 
+                    className="p-1.5 sm:p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors" 
                     title="O'chirish"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </button>
                 </div>
                 {task.status === 'approved' && (
@@ -386,17 +395,18 @@ const MasterTasks: React.FC = () => {
           ))}
         </div>
 
+        {/* Empty State - Responsive */}
         {searchedTasks?.length === 0 && (
-          <div className="card-gradient p-12 text-center">
+          <div className="card-gradient p-8 sm:p-12 text-center">
             <div className="max-w-md mx-auto">
-              <div className="h-24 w-24 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <CheckSquare className="h-12 w-12 text-blue-600" />
+              <div className="h-20 w-20 sm:h-24 sm:w-24 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <CheckSquare className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Vazifalar topilmadi</h3>
-              <p className="text-gray-600 mb-8">Birinchi vazifani yaratish uchun quyidagi tugmani bosing</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">Vazifalar topilmadi</h3>
+              <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base">Birinchi vazifani yaratish uchun quyidagi tugmani bosing</p>
               <button
                 onClick={() => setIsCreateModalOpen(true)}
-                className="btn-primary btn-lg"
+                className="btn-primary btn-lg w-full sm:w-auto"
               >
                 <Plus className="h-5 w-5 mr-2" />
                 Vazifa yaratish

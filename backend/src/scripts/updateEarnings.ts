@@ -8,12 +8,9 @@ dotenv.config();
 const updateEarnings = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/autoservice');
-    console.log('Connected to MongoDB');
 
     // Get all approved tasks
     const approvedTasks = await Task.find({ status: 'approved' }).populate('assignedTo');
-    
-    console.log(`Found ${approvedTasks.length} approved tasks`);
 
     // Group tasks by apprentice
     const earningsByApprentice: { [key: string]: number } = {};
@@ -43,10 +40,8 @@ const updateEarnings = async () => {
         apprenticeId,
         { earnings: totalEarnings }
       );
-      console.log(`Updated apprentice ${apprenticeId}: ${totalEarnings} so'm`);
     }
 
-    console.log('✅ Earnings updated successfully!');
     process.exit(0);
   } catch (error) {
     console.error('Error updating earnings:', error);

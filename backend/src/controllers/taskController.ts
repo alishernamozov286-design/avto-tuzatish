@@ -89,9 +89,9 @@ export const updateTask = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    // Only master can update tasks
-    if (req.user!.role !== 'master') {
-      return res.status(403).json({ message: 'Only masters can update tasks' });
+    // Master can update any task, apprentice can only update their own tasks
+    if (req.user!.role !== 'master' && task.assignedTo.toString() !== req.user!._id.toString()) {
+      return res.status(403).json({ message: 'Access denied' });
     }
 
     // Update task fields
@@ -253,9 +253,9 @@ export const deleteTask = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    // Only master can delete tasks
-    if (req.user!.role !== 'master') {
-      return res.status(403).json({ message: 'Only masters can delete tasks' });
+    // Master can delete any task, apprentice can only delete their own tasks
+    if (req.user!.role !== 'master' && task.assignedTo.toString() !== req.user!._id.toString()) {
+      return res.status(403).json({ message: 'Access denied' });
     }
 
     await Task.findByIdAndDelete(req.params.id);

@@ -14,7 +14,6 @@ dotenv.config();
 const createSubscription = async (username: string, plan: 'free' | 'basic' | 'pro') => {
   try {
     await mongoose.connect(process.env.MONGODB_URI!);
-    console.log('✅ Connected to MongoDB');
 
     // Find user
     const user = await User.findOne({ username });
@@ -43,7 +42,6 @@ const createSubscription = async (username: string, plan: 'free' | 'basic' | 'pr
       subscription.messageLimit = messageLimits[plan];
       subscription.messagesUsed = 0;
       await subscription.save();
-      console.log(`✅ Subscription updated for ${username}`);
     } else {
       // Create new subscription
       subscription = new Subscription({
@@ -55,16 +53,7 @@ const createSubscription = async (username: string, plan: 'free' | 'basic' | 'pr
         messagesUsed: 0
       });
       await subscription.save();
-      console.log(`✅ Subscription created for ${username}`);
     }
-
-    console.log('\n📊 Subscription Details:');
-    console.log(`User: ${user.name} (${user.username})`);
-    console.log(`Plan: ${subscription.plan.toUpperCase()}`);
-    console.log(`Status: ${subscription.status}`);
-    console.log(`Message Limit: ${subscription.messageLimit === 999999 ? 'Unlimited' : subscription.messageLimit}`);
-    console.log(`Messages Used: ${subscription.messagesUsed}`);
-    console.log(`End Date: ${subscription.endDate.toLocaleDateString()}`);
 
     process.exit(0);
   } catch (error) {

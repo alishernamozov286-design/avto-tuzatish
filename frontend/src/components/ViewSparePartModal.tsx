@@ -34,8 +34,6 @@ const ViewSparePartModal: React.FC<ViewSparePartModalProps> = ({
     return (savedLanguage as 'latin' | 'cyrillic') || 'latin';
   }, []);
 
-  console.log('ViewSparePartModal - isOpen:', isOpen, 'sparePart:', sparePart);
-
   if (!isOpen) return null;
 
   const formatDate = (dateString: string) => {

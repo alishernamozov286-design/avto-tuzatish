@@ -37,8 +37,17 @@ router.get('/profile', authenticate, getProfile);
 // Get current user (me)
 router.get('/me', authenticate, getProfile);
 
-// Get users (master only)
-router.get('/users', authenticate, authorize('master'), getUsers);
+// Get users (authenticated users can see apprentices, masters can see all)
+router.get('/users', authenticate, (req, res, next) => {
+  const { role } = req.query;
+  
+  // Agar shogird bo'lsa, faqat boshqa shogirdlarni ko'ra oladi
+  if ((req as any).user.role === 'apprentice' && role !== 'apprentice') {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  
+  next();
+}, getUsers);
 
 // Get apprentices with stats (master only)
 router.get('/apprentices/stats', authenticate, authorize('master'), getApprenticesWithStats);

@@ -17,9 +17,9 @@ export const useUsers = (role?: string) => {
 
 export const useApprentices = () => {
   return useQuery({
-    queryKey: ['apprentices', 'stats'],
+    queryKey: ['users', 'apprentice'],
     queryFn: async () => {
-      const response = await api.get('/auth/apprentices/stats');
+      const response = await api.get('/auth/users?role=apprentice');
       return response.data;
     },
   });

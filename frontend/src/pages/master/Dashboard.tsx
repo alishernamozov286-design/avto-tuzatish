@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTaskStats } from '@/hooks/useTasks';
 import { useDebtSummary } from '@/hooks/useDebts';
@@ -25,61 +25,65 @@ import {
 import { formatCurrency } from '@/lib/utils';
 import { t } from '@/lib/transliteration';
 
-const MasterDashboard: React.FC = () => {
+const MasterDashboard: React.FC = memo(() => {
   const { user } = useAuth();
   const { data: taskStats, isLoading: taskStatsLoading } = useTaskStats();
   const { data: debtSummary, isLoading: debtSummaryLoading } = useDebtSummary();
   const { data: apprenticesData, isLoading: apprenticesLoading } = useApprentices();
 
-  // localStorage'dan tilni o'qish
-  const language = React.useMemo<'latin' | 'cyrillic'>(() => {
+  // localStorage'dan tilni o'qish - faqat bir marta
+  const language = useMemo<'latin' | 'cyrillic'>(() => {
     const savedLanguage = localStorage.getItem('language');
     return (savedLanguage as 'latin' | 'cyrillic') || 'latin';
   }, []);
 
-  const getTaskStatByStatus = (status: string) => {
+  // Task statistikalarini memoize qilish
+  const getTaskStatByStatus = useCallback((status: string) => {
     return (taskStats as any)?.stats?.find((stat: any) => stat._id === status) || { count: 0, totalEstimatedHours: 0, totalActualHours: 0 };
-  };
+  }, [taskStats]);
 
-  const assignedTasks = getTaskStatByStatus('assigned');
-  const inProgressTasks = getTaskStatByStatus('in-progress');
-  const completedTasks = getTaskStatByStatus('completed');
-  const approvedTasks = getTaskStatByStatus('approved');
+  // Task stats ma'lumotlarini memoize qilish
+  const taskStatsData = useMemo(() => {
+    const assignedTasks = getTaskStatByStatus('assigned');
+    const inProgressTasks = getTaskStatByStatus('in-progress');
+    const completedTasks = getTaskStatByStatus('completed');
+    const approvedTasks = getTaskStatByStatus('approved');
 
-  const taskStats_data = [
-    {
-      name: t('Tayinlangan vazifalar', language),
-      value: assignedTasks.count,
-      icon: CheckSquare,
-      bgColor: 'bg-gradient-to-br from-blue-500 to-blue-600',
-      change: '+12%',
-      changeType: 'positive'
-    },
-    {
-      name: t('Jarayonda', language),
-      value: inProgressTasks.count,
-      icon: Clock,
-      bgColor: 'bg-gradient-to-br from-amber-500 to-orange-500',
-      change: '+8%',
-      changeType: 'positive'
-    },
-    {
-      name: t('Bajarilgan', language),
-      value: completedTasks.count,
-      icon: AlertCircle,
-      bgColor: 'bg-gradient-to-br from-orange-500 to-red-500',
-      change: '+15%',
-      changeType: 'positive'
-    },
-    {
-      name: t('Tasdiqlangan', language),
-      value: approvedTasks.count,
-      icon: CheckCircle,
-      bgColor: 'bg-gradient-to-br from-green-500 to-emerald-600',
-      change: '+22%',
-      changeType: 'positive'
-    },
-  ];
+    return [
+      {
+        name: t('Tayinlangan vazifalar', language),
+        value: assignedTasks.count,
+        icon: CheckSquare,
+        bgColor: 'bg-gradient-to-br from-blue-500 to-blue-600',
+        change: '+12%',
+        changeType: 'positive' as const
+      },
+      {
+        name: t('Jarayonda', language),
+        value: inProgressTasks.count,
+        icon: Clock,
+        bgColor: 'bg-gradient-to-br from-amber-500 to-orange-500',
+        change: '+8%',
+        changeType: 'positive' as const
+      },
+      {
+        name: t('Bajarilgan', language),
+        value: completedTasks.count,
+        icon: AlertCircle,
+        bgColor: 'bg-gradient-to-br from-orange-500 to-red-500',
+        change: '+15%',
+        changeType: 'positive' as const
+      },
+      {
+        name: t('Tasdiqlangan', language),
+        value: approvedTasks.count,
+        icon: CheckCircle,
+        bgColor: 'bg-gradient-to-br from-green-500 to-emerald-600',
+        change: '+22%',
+        changeType: 'positive' as const
+      },
+    ];
+  }, [getTaskStatByStatus, language]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -111,7 +115,7 @@ const MasterDashboard: React.FC = () => {
 
         {/* Task Statistics */}
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {taskStats_data.map((stat, index) => {
+          {taskStatsData.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div key={stat.name} className="group animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -185,17 +189,17 @@ const MasterDashboard: React.FC = () => {
                   <TrendingDown className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <div className="ml-3 sm:ml-4 flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm font-semibold text-red-700">{t("Bizning qarzimiz", language)}</p>
-                  <p className="text-xl sm:text-2xl font-bold text-red-900 truncate">
+                  <div className="text-xs sm:text-sm font-semibold text-red-700">{t("Bizning qarzimiz", language)}</div>
+                  <div className="text-xl sm:text-2xl font-bold text-red-900 truncate">
                     {debtSummaryLoading ? (
                       <div className="animate-pulse bg-red-200 h-6 sm:h-8 w-20 sm:w-24 rounded"></div>
                     ) : (
                       formatCurrency((debtSummary as any)?.payables?.remaining || 0)
                     )}
-                  </p>
-                  <p className="text-xs text-red-600 font-medium">
+                  </div>
+                  <div className="text-xs text-red-600 font-medium">
                     {(debtSummary as any)?.payables?.count || 0} {t("ta'minotchi", language)}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -206,8 +210,8 @@ const MasterDashboard: React.FC = () => {
                   <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <div className="ml-3 sm:ml-4 flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm font-semibold text-blue-700">{t("Umumiy holat", language)}</p>
-                  <p className={`text-xl sm:text-2xl font-bold truncate ${
+                  <div className="text-xs sm:text-sm font-semibold text-blue-700">{t("Umumiy holat", language)}</div>
+                  <div className={`text-xl sm:text-2xl font-bold truncate ${
                     ((debtSummary as any)?.netPosition || 0) >= 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {debtSummaryLoading ? (
@@ -215,12 +219,12 @@ const MasterDashboard: React.FC = () => {
                     ) : (
                       formatCurrency((debtSummary as any)?.netPosition || 0)
                     )}
-                  </p>
-                  <p className={`text-xs font-medium ${
+                  </div>
+                  <div className={`text-xs font-medium ${
                     ((debtSummary as any)?.netPosition || 0) >= 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {((debtSummary as any)?.netPosition || 0) >= 0 ? t('Ijobiy holat', language) : t('Salbiy holat', language)}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -269,8 +273,8 @@ const MasterDashboard: React.FC = () => {
                           {apprentice.name.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">{apprentice.name}</p>
-                          <p className="text-xs sm:text-sm text-gray-500 truncate">@{apprentice.username}</p>
+                          <div className="font-semibold text-gray-900 text-sm sm:text-base truncate">{apprentice.name}</div>
+                          <div className="text-xs sm:text-sm text-gray-500 truncate">@{apprentice.username}</div>
                           <div className="flex items-center mt-1">
                             <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
                             <span className="text-xs text-gray-600">{t("Yangi shogird", language)}</span>
@@ -292,7 +296,7 @@ const MasterDashboard: React.FC = () => {
               ) : (
                 <div className="text-center py-6 sm:py-8">
                   <Users className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mb-3 sm:mb-4" />
-                  <p className="text-sm sm:text-base text-gray-500 mb-3 sm:mb-4">{t("Hozircha shogirdlar yo'q", language)}</p>
+                  <div className="text-sm sm:text-base text-gray-500 mb-3 sm:mb-4">{t("Hozircha shogirdlar yo'q", language)}</div>
                   <Link to="/master/apprentices" className="btn-primary btn-sm">
                     <Plus className="h-4 w-4 mr-2" />
                     {t("Birinchi shogirdni qo'shish", language)}
@@ -344,16 +348,16 @@ const MasterDashboard: React.FC = () => {
             </h3>
             <div className="text-center py-6 sm:py-8">
               <Calendar className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mb-3 sm:mb-4" />
-              <p className="text-sm sm:text-base text-gray-500">{t("Hozircha faoliyat yo'q", language)}</p>
-              <p className="text-xs sm:text-sm text-gray-400 mt-2">
+              <div className="text-sm sm:text-base text-gray-500">{t("Hozircha faoliyat yo'q", language)}</div>
+              <div className="text-xs sm:text-sm text-gray-400 mt-2">
                 {t("Vazifalar va amallar bajarilgandan so'ng bu yerda ko'rinadi", language)}
-              </p>
+              </div>
             </div>
           </div>
         )}
       </div>
     </div>
   );
-};
+});
 
 export default MasterDashboard;

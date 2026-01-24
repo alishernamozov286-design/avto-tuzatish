@@ -523,58 +523,57 @@ const Debts: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/20 to-indigo-50/20 -m-6 p-4 sm:p-6">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
-        {/* Header - Modern & Elegant */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/20 to-indigo-50/20 p-2 sm:p-6 pb-20">
+      <div className="max-w-7xl mx-auto space-y-3 sm:space-y-8">
+        {/* Mobile-First Header */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 rounded-xl sm:rounded-3xl shadow-2xl p-3 sm:p-6 lg:p-8">
           <div className="absolute inset-0 bg-grid-white/10"></div>
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"></div>
           
-          <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center space-x-4 sm:space-x-6">
-              <div className="bg-white/20 backdrop-blur-xl p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg">
-                <DollarSign className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+          <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <div className="flex items-center space-x-3 sm:space-x-6">
+              <div className="bg-white/20 backdrop-blur-xl p-2.5 sm:p-4 rounded-lg sm:rounded-2xl shadow-lg">
+                <DollarSign className="h-6 w-6 sm:h-10 sm:w-10 text-white" />
               </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 tracking-tight">{t("Qarz daftarchasi", language)}</h1>
-                <p className="text-blue-100 text-sm sm:text-base lg:text-lg">
-                  {t("Moliyaviy majburiyatlar va to'lovlarni boshqaring", language)}
+              <div className="text-center sm:text-left">
+                <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 tracking-tight">{t("Qarz daftarchasi", language)}</h1>
+                <p className="text-blue-100 text-xs sm:text-base lg:text-lg">
+                  {debts.length} ta qarz mavjud
                 </p>
               </div>
             </div>
             <button
               onClick={() => setIsCreateModalOpen(true)}
-              className="group relative bg-white hover:bg-blue-50 text-blue-600 px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 w-full sm:w-auto"
+              className="group relative bg-white hover:bg-blue-50 text-blue-600 px-4 py-3 sm:px-6 sm:py-3.5 rounded-xl font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 w-full sm:w-auto"
             >
               <Plus className="h-4 w-4 sm:h-5 sm:w-5 group-hover:rotate-90 transition-transform duration-300" />
-              <span className="text-sm sm:text-base">
-                <span className="hidden sm:inline">{t("Yangi qarz", language)}</span>
-                <span className="sm:hidden">{t("Qo'shish", language)}</span>
+              <span className="text-sm sm:text-base font-semibold">
+                {t("Yangi qarz", language)}
               </span>
             </button>
           </div>
         </div>
 
-        {/* Summary Cards - Enhanced */}
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Mobile-Optimized Summary Cards */}
+        <div className="grid grid-cols-1 gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* Receivables Card */}
-          <div className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 hover:-translate-y-1">
-            <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16 opacity-50"></div>
-            <div className="relative p-4 sm:p-6">
-              <div className="flex items-start justify-between mb-3 sm:mb-4">
-                <div className="bg-gradient-to-br from-blue-500 to-cyan-600 p-2.5 sm:p-3 rounded-xl shadow-lg">
-                  <TrendingUp className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
+          <div className="group relative bg-white rounded-lg sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 hover:-translate-y-1">
+            <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full -mr-10 sm:-mr-16 -mt-10 sm:-mt-16 opacity-50"></div>
+            <div className="relative p-3 sm:p-6">
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <div className="bg-gradient-to-br from-blue-500 to-cyan-600 p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-lg">
+                  <TrendingUp className="h-4 w-4 sm:h-7 sm:w-7 text-white" />
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">{t("Bizga qarzi bor", language)}</p>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                  <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">{t("Bizga qarzi", language)}</p>
+                  <p className="text-xs text-gray-500 mt-1">
                     {(debtSummary as any)?.receivables?.count || 0} {t("mijoz", language)}
                   </p>
                 </div>
               </div>
-              <div className="mt-3 sm:mt-4">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <div className="mt-2 sm:mt-4">
+                <p className="text-lg sm:text-3xl font-bold text-gray-900">
                   {summaryLoading ? (
                     <span className="animate-pulse">...</span>
                   ) : (
@@ -594,22 +593,22 @@ const Debts: React.FC = () => {
           </div>
 
           {/* Payables Card */}
-          <div className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-indigo-200 hover:-translate-y-1">
-            <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16 opacity-50"></div>
-            <div className="relative p-4 sm:p-6">
-              <div className="flex items-start justify-between mb-3 sm:mb-4">
-                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-2.5 sm:p-3 rounded-xl shadow-lg">
-                  <TrendingDown className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
+          <div className="group relative bg-white rounded-lg sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-indigo-200 hover:-translate-y-1">
+            <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full -mr-10 sm:-mr-16 -mt-10 sm:-mt-16 opacity-50"></div>
+            <div className="relative p-3 sm:p-6">
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-lg">
+                  <TrendingDown className="h-4 w-4 sm:h-7 sm:w-7 text-white" />
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide">{t("Bizning qarzimiz", language)}</p>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                  <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide">{t("Bizning qarzi", language)}</p>
+                  <p className="text-xs text-gray-500 mt-1">
                     {(debtSummary as any)?.payables?.count || 0} {t("ta'minotchi", language)}
                   </p>
                 </div>
               </div>
-              <div className="mt-3 sm:mt-4">
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <div className="mt-2 sm:mt-4">
+                <p className="text-lg sm:text-3xl font-bold text-gray-900">
                   {summaryLoading ? (
                     <span className="animate-pulse">...</span>
                   ) : (
@@ -629,24 +628,24 @@ const Debts: React.FC = () => {
           </div>
 
           {/* Net Position Card */}
-          <div className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-sky-200 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
-            <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-sky-100 to-blue-100 rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16 opacity-50"></div>
-            <div className="relative p-4 sm:p-6">
-              <div className="flex items-start justify-between mb-3 sm:mb-4">
-                <div className="bg-gradient-to-br from-sky-500 to-blue-600 p-2.5 sm:p-3 rounded-xl shadow-lg">
-                  <DollarSign className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
+          <div className="group relative bg-white rounded-lg sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-sky-200 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
+            <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-sky-100 to-blue-100 rounded-full -mr-10 sm:-mr-16 -mt-10 sm:-mt-16 opacity-50"></div>
+            <div className="relative p-3 sm:p-6">
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <div className="bg-gradient-to-br from-sky-500 to-blue-600 p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-lg">
+                  <DollarSign className="h-4 w-4 sm:h-7 sm:w-7 text-white" />
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-semibold text-sky-600 uppercase tracking-wide">{t("Umumiy holat", language)}</p>
-                  <p className={`text-xs sm:text-sm font-medium mt-1 ${
+                  <p className="text-xs font-semibold text-sky-600 uppercase tracking-wide">{t("Holat", language)}</p>
+                  <p className={`text-xs font-medium mt-1 ${
                     ((debtSummary as any)?.netPosition || 0) >= 0 ? 'text-blue-600' : 'text-indigo-600'
                   }`}>
                     {((debtSummary as any)?.netPosition || 0) >= 0 ? t('✓ Ijobiy', language) : t('⚠ Salbiy', language)}
                   </p>
                 </div>
               </div>
-              <div className="mt-3 sm:mt-4">
-                <p className={`text-2xl sm:text-3xl font-bold ${
+              <div className="mt-2 sm:mt-4">
+                <p className={`text-lg sm:text-3xl font-bold ${
                   ((debtSummary as any)?.netPosition || 0) >= 0 ? 'text-blue-600' : 'text-indigo-600'
                 }`}>
                   {summaryLoading ? (
@@ -667,13 +666,13 @@ const Debts: React.FC = () => {
           </div>
         </div>
 
-        {/* Filters - Modern Design */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+        {/* Mobile-First Filters */}
+        <div className="bg-white rounded-lg sm:rounded-2xl shadow-lg border border-gray-100 p-3 sm:p-6">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="flex-1 px-3 sm:px-4 py-3 sm:py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm font-medium appearance-none cursor-pointer"
+              className="flex-1 px-3 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm font-medium appearance-none cursor-pointer"
             >
               <option value="">{t("Barcha turlar", language)}</option>
               <option value="receivable">{t("Bizga qarzi bor", language)}</option>
@@ -682,7 +681,7 @@ const Debts: React.FC = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="flex-1 px-3 sm:px-4 py-3 sm:py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm font-medium appearance-none cursor-pointer"
+              className="flex-1 px-3 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm font-medium appearance-none cursor-pointer"
             >
               <option value="">{t("Barcha holatlar", language)}</option>
               <option value="pending">{t("To'lanmagan", language)}</option>
@@ -702,13 +701,13 @@ const Debts: React.FC = () => {
             <p className="mt-4 sm:mt-6 text-gray-600 font-medium text-sm sm:text-base">{t("Qarzlar yuklanmoqda...", language)}</p>
           </div>
         ) : debts.length === 0 ? (
-          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-8 sm:p-16 text-center">
+          <div className="bg-white rounded-lg sm:rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-16 text-center">
             <div className="max-w-md mx-auto">
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-full w-16 h-16 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <DollarSign className="h-8 w-8 sm:h-12 sm:w-12 text-blue-600" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">{t("Qarzlar topilmadi", language)}</h3>
-              <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base px-4 sm:px-0">
+              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">{t("Qarzlar topilmadi", language)}</h3>
+              <p className="text-gray-600 mb-4 sm:mb-8 text-sm sm:text-base px-4 sm:px-0">
                 {t("Tizimga birinchi qarzni qo'shishdan boshlang va moliyaviy majburiyatlarni kuzatib boring.", language)}
               </p>
               <button
@@ -721,7 +720,7 @@ const Debts: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {debts.map((debt: Debt) => {
               const statusConfig = getStatusConfig(debt.status);
               const isReceivable = debt.type === 'receivable';
@@ -731,13 +730,13 @@ const Debts: React.FC = () => {
               return (
                 <div
                   key={debt._id}
-                  className="group relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 hover:-translate-y-1"
+                  className="group relative bg-white rounded-lg sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 hover:-translate-y-1"
                 >
                   {/* Status Badge - Top Right */}
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10">
-                    <div className={`${statusConfig.bg} ${statusConfig.border} border px-2 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center space-x-1.5 sm:space-x-2 shadow-sm`}>
+                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10">
+                    <div className={`${statusConfig.bg} ${statusConfig.border} border px-2 py-1 sm:px-3 sm:py-1.5 rounded-full flex items-center space-x-1 sm:space-x-2 shadow-sm`}>
                       <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusConfig.dot} animate-pulse`}></div>
-                      <span className={`text-xs font-semibold ${statusConfig.text}`}>
+                      <span className={`text-xs font-semibold ${statusConfig.text} hidden sm:inline`}>
                         {getStatusText(debt.status)}
                       </span>
                     </div>
@@ -747,17 +746,17 @@ const Debts: React.FC = () => {
                   <div className={`${isReceivable 
                     ? 'bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-700' 
                     : 'bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700'
-                  } p-4 sm:p-6 pb-6 sm:pb-8`}>
-                    <div className="flex items-start space-x-3 sm:space-x-4">
-                      <div className="bg-white/20 backdrop-blur-xl p-2.5 sm:p-3 rounded-xl shadow-lg">
+                  } p-3 sm:p-6 pb-4 sm:pb-8`}>
+                    <div className="flex items-start space-x-2 sm:space-x-4">
+                      <div className="bg-white/20 backdrop-blur-xl p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-lg">
                         {isReceivable ? (
-                          <TrendingUp className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
+                          <TrendingUp className="h-4 w-4 sm:h-7 sm:w-7 text-white" />
                         ) : (
-                          <TrendingDown className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
+                          <TrendingDown className="h-4 w-4 sm:h-7 sm:w-7 text-white" />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-1 truncate">
+                        <h3 className="text-base sm:text-xl font-bold text-white mb-1 truncate">
                           {debt.creditorName}
                         </h3>
                         <p className={`text-xs sm:text-sm ${isReceivable ? 'text-blue-100' : 'text-indigo-100'}`}>
@@ -768,10 +767,10 @@ const Debts: React.FC = () => {
                   </div>
 
                   {/* Card Body */}
-                  <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                  <div className="p-3 sm:p-6 space-y-2 sm:space-y-4">
                     {/* Amount Info */}
-                    <div className="bg-gradient-to-r from-gray-50 to-blue-50/50 rounded-xl p-3 sm:p-4 border border-gray-100">
-                      <div className="space-y-2 sm:space-y-2.5">
+                    <div className="bg-gradient-to-r from-gray-50 to-blue-50/50 rounded-lg sm:rounded-xl p-2.5 sm:p-4 border border-gray-100">
+                      <div className="space-y-1.5 sm:space-y-2.5">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-semibold text-gray-500 uppercase">{t("Umumiy", language)}</span>
                           <span className="text-sm sm:text-base font-bold text-gray-900">{formatCurrency(debt.amount)}</span>
@@ -780,13 +779,13 @@ const Debts: React.FC = () => {
                           <span className="text-xs font-semibold text-gray-500 uppercase">{t("To'langan", language)}</span>
                           <span className="text-sm sm:text-base font-bold text-blue-600">{formatCurrency(debt.paidAmount)}</span>
                         </div>
-                        <div className="pt-2 border-t border-gray-200">
-                          <div className="flex items-center justify-between mb-2">
+                        <div className="pt-1.5 sm:pt-2 border-t border-gray-200">
+                          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
                             <span className="text-xs font-semibold text-gray-500 uppercase">{t("Qolgan", language)}</span>
-                            <span className="text-base sm:text-lg font-bold text-red-600">{formatCurrency(remainingAmount)}</span>
+                            <span className="text-sm sm:text-lg font-bold text-red-600">{formatCurrency(remainingAmount)}</span>
                           </div>
                           {/* Progress Bar */}
-                          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                          <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2 overflow-hidden">
                             <div 
                               className={`h-full rounded-full transition-all duration-500 ${
                                 progressPercentage === 100 ? 'bg-blue-500' : 'bg-blue-500'
@@ -800,7 +799,7 @@ const Debts: React.FC = () => {
                     </div>
 
                     {/* Contact & Date Info */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5 sm:space-y-2">
                       {debt.creditorPhone && (
                         <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
                           <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 flex-shrink-0" />
@@ -823,11 +822,11 @@ const Debts: React.FC = () => {
                   </div>
 
                   {/* Card Footer - Action Buttons */}
-                  <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-                    <div className="flex items-center gap-2 pt-3 sm:pt-4 border-t border-gray-100">
+                  <div className="px-3 sm:px-6 pb-3 sm:pb-6">
+                    <div className="flex items-center gap-2 pt-2 sm:pt-4 border-t border-gray-100">
                       <button 
                         onClick={() => setSelectedDebt(debt)}
-                        className="flex-1 flex items-center justify-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-xl transition-all duration-200 font-medium group"
+                        className="flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-3 py-2 sm:py-2.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg sm:rounded-xl transition-all duration-200 font-medium group"
                         title={t("Ko'rish", language)}
                       >
                         <Eye className="h-3 w-3 sm:h-4 sm:w-4 group-hover:scale-110 transition-transform" />
@@ -838,7 +837,7 @@ const Debts: React.FC = () => {
                           setSelectedDebt(debt);
                           setIsEditModalOpen(true);
                         }}
-                        className="p-2 sm:p-2.5 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-xl transition-all duration-200"
+                        className="p-2 sm:p-2.5 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg sm:rounded-xl transition-all duration-200"
                         title={t("Tahrirlash", language)}
                       >
                         <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -848,7 +847,7 @@ const Debts: React.FC = () => {
                           setSelectedDebt(debt);
                           setIsDeleteModalOpen(true);
                         }}
-                        className="p-2 sm:p-2.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 rounded-xl transition-all duration-200"
+                        className="p-2 sm:p-2.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 rounded-lg sm:rounded-xl transition-all duration-200"
                         title={t("O'chirish", language)}
                       >
                         <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -860,7 +859,7 @@ const Debts: React.FC = () => {
                           setSelectedDebt(debt);
                           setIsPaymentModalOpen(true);
                         }}
-                        className="w-full mt-2 sm:mt-3 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-cyan-700 shadow-sm hover:shadow-md transition-all duration-200 text-xs sm:text-sm"
+                        className="w-full mt-2 sm:mt-3 px-3 py-2 sm:py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-cyan-700 shadow-sm hover:shadow-md transition-all duration-200 text-xs sm:text-sm"
                       >
                         <Plus className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1 sm:mr-1.5" />
                         {t("To'lov qo'shish", language)}
